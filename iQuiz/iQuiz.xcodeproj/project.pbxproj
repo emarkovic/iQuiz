@@ -14,6 +14,7 @@
 		619CC6DF1EBBA1F700D73839 /* iQuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619CC6DE1EBBA1F700D73839 /* iQuizTests.swift */; };
 		619CC6EA1EBBA1F700D73839 /* iQuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619CC6E91EBBA1F700D73839 /* iQuizUITests.swift */; };
 		619CC6FA1EBBA4E900D73839 /* CategoriesTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619CC6F91EBBA4E900D73839 /* CategoriesTableTableViewController.swift */; };
+		619CC6FE1EBBAFB900D73839 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619CC6FD1EBBAFB900D73839 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		619CC6E91EBBA1F700D73839 /* iQuizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iQuizUITests.swift; sourceTree = "<group>"; };
 		619CC6EB1EBBA1F700D73839 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		619CC6F91EBBA4E900D73839 /* CategoriesTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableTableViewController.swift; sourceTree = "<group>"; };
+		619CC6FD1EBBAFB900D73839 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				619CC6D01EBBA1F600D73839 /* Assets.xcassets */,
 				619CC6D21EBBA1F600D73839 /* LaunchScreen.storyboard */,
 				619CC6D51EBBA1F600D73839 /* Info.plist */,
+				619CC6FD1EBBAFB900D73839 /* Category.swift */,
 			);
 			path = iQuiz;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				619CC6FA1EBBA4E900D73839 /* CategoriesTableTableViewController.swift in Sources */,
 				619CC6CA1EBBA1F600D73839 /* AppDelegate.swift in Sources */,
+				619CC6FE1EBBAFB900D73839 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

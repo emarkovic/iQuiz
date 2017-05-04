@@ -9,8 +9,11 @@
 import UIKit
 
 class CategoriesTableTableViewController: UITableViewController {
-    
-    var categories = ["Mathematics", "Marvel Super Heroes", "Science"]
+    var data = [
+        Category(title: "Mathematics", subtitle: "Questions about math", questions: ["What is x"], imageName: "math"),
+        Category(title: "Marvel Super Heroes", subtitle: "Questions about marvel", questions: ["Who really is marvel?"], imageName: "marvel"),
+        Category(title: "Science", subtitle: "Questions about science", questions: ["What is science?"], imageName: "science")
+    ]  
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +39,13 @@ class CategoriesTableTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return categories.count
+        return data.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
 
-        cell.textLabel?.text = categories[indexPath.row]
+        cell.textLabel?.text = data[indexPath.row].title
         print(cell)
 
         return cell
