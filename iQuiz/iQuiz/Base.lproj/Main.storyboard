@@ -65,10 +65,10 @@
             </objects>
             <point key="canvasLocation" x="1692" y="584.25787106446785"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Questions Table View Controller-->
         <scene sceneID="ilf-DH-rqB">
             <objects>
-                <tableViewController id="8KU-8D-TYE" sceneMemberID="viewController">
+                <tableViewController id="8KU-8D-TYE" customClass="QuestionsTableViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="AH0-Gr-XM4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

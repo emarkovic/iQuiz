@@ -1,5 +1,5 @@
 //
-//  CategoriesTableTableViewController.swift
+//  QuestionsTableViewController.swift
 //  iQuiz
 //
 //  Created by Personal on 5/4/17.
@@ -8,16 +8,12 @@
 
 import UIKit
 
-class CategoriesTableTableViewController: UITableViewController {
-    var data = [
-        Category(title: "Mathematics", subtitle: "Questions about math", questions: ["What is x"], imageName: "math"),
-        Category(title: "Marvel Super Heroes", subtitle: "Questions about marvel", questions: ["Who really is marvel?"], imageName: "marvel"),
-        Category(title: "Science", subtitle: "Questions about science", questions: ["What is science?"], imageName: "science")
-    ]
+class QuestionsTableViewController: UITableViewController {
+    var category: Category?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "iQuiz"
+        self.title = category!.title
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -34,29 +30,23 @@ class CategoriesTableTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return data.count
+        return 0
     }
 
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
-        
-        let item = data[indexPath.row]
-        cell.textLabel?.text = item.title
-        cell.detailTextLabel?.text = item.subtitle
-        cell.imageView?.image = item.image
-        print(cell)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
 
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Categories"
-    }
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -93,19 +83,14 @@ class CategoriesTableTableViewController: UITableViewController {
     }
     */
 
-
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let rowClicked = tableView.indexPathForSelectedRow?.row
-        if segue.identifier == "CatToQuiz" {
-            let destination = segue.destination as! QuestionsTableViewController
-            destination.category = data[rowClicked!]
-        }
     }
- 
+    */
 
 }
