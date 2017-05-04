@@ -10,7 +10,7 @@ import UIKit
 
 class CategoriesTableTableViewController: UITableViewController {
     var data = [
-        Category(title: "Mathematics", subtitle: "Questions about math", questions: ["What is x"], imageName: "math"),
+        Category(title: "Mathematics", subtitle: "Questions about math", questions: ["What is x?"], imageName: "math"),
         Category(title: "Marvel Super Heroes", subtitle: "Questions about marvel", questions: ["Who really is marvel?"], imageName: "marvel"),
         Category(title: "Science", subtitle: "Questions about science", questions: ["What is science?"], imageName: "science")
     ]
