@@ -57,10 +57,10 @@
                                 <rect key="frame" x="276" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Settings"/>
+                                <connections>
+                                    <action selector="settingsPressed:" destination="qDd-IV-5Y9" eventType="touchUpInside" id="6do-nB-SfA"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <action selector="settingsPressed:" destination="qDd-IV-5Y9" id="QEB-EK-7bE"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>

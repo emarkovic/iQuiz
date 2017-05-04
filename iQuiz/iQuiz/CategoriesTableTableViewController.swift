@@ -14,9 +14,15 @@ class CategoriesTableTableViewController: UITableViewController {
         Category(title: "Marvel Super Heroes", subtitle: "Questions about marvel", questions: ["Who really is marvel?", "What happens when a super hero walks into a bar?"], imageName: "marvel"),
         Category(title: "Science", subtitle: "Questions about science", questions: ["What is science?", "How does the world work?"], imageName: "science")
     ]
-
-    @IBAction func settingsPressed(_ sender: Any) {
     
+    @IBAction func settingsPressed(_ sender: Any) {
+        let refreshAlert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: UIAlertControllerStyle.alert)
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    refreshAlert.dismiss(animated: true, completion: nil)
+                }))
+        
+        present(refreshAlert, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
