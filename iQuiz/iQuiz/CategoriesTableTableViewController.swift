@@ -13,7 +13,7 @@ class CategoriesTableTableViewController: UITableViewController {
         Category(title: "Mathematics", subtitle: "Questions about math", questions: ["What is x"], imageName: "math"),
         Category(title: "Marvel Super Heroes", subtitle: "Questions about marvel", questions: ["Who really is marvel?"], imageName: "marvel"),
         Category(title: "Science", subtitle: "Questions about science", questions: ["What is science?"], imageName: "science")
-    ]  
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +44,11 @@ class CategoriesTableTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
-
-        cell.textLabel?.text = data[indexPath.row].title
+        
+        let item = data[indexPath.row]
+        cell.textLabel?.text = item.title
+        cell.detailTextLabel?.text = item.subtitle
+        cell.imageView?.image = item.image
         print(cell)
 
         return cell
