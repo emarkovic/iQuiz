@@ -58,6 +58,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Settings"/>
                             </button>
+                            <connections>
+                                <action selector="settingsPressed:" destination="qDd-IV-5Y9" id="QEB-EK-7bE"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
