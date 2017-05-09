@@ -10,7 +10,10 @@ import UIKit
 
 class QuestionViewController: UIViewController {
     var questions: [Question]?
-    var currentQuest = 0;
+    var currentQuestionIndex: Int?
+    var categoryIndex: Int?
+    var numCorrect: Int?
+    
     var currBtnPressed: UIButton?
     var answerIndex: Int?
     
@@ -22,7 +25,7 @@ class QuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let curQuestion = questions![currentQuest]
+        let curQuestion = questions![currentQuestionIndex!]
         
         questionLabel.text = curQuestion.question
         
@@ -84,7 +87,13 @@ class QuestionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToAnswer" {
             let destination = segue.destination as! AnswerViewController
-            destination.question = questions![currentQuest]
+            destination.question = questions![currentQuestionIndex!]
+            destination.currentQuestionIndex = currentQuestionIndex!
+            destination.categoryIndex = categoryIndex!
+            destination.numCorrect = numCorrect!
+            if answerIndex == nil {
+                answerIndex = 0
+            }
             destination.userAnswer = answerIndex            
         }
     }
