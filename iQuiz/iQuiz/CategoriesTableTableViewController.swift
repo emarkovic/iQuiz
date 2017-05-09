@@ -105,9 +105,9 @@ class CategoriesTableTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         let rowClicked = tableView.indexPathForSelectedRow?.row
-        if segue.identifier == "CatToQuiz" {
-            let destination = segue.destination as! QuestionsTableViewController
-            destination.category = data[rowClicked!]
+        if segue.identifier == "ToQuiz" {
+            let destination = segue.destination as! QuestionViewController
+            destination.questions = data[rowClicked!].questions
         }
     }
  
