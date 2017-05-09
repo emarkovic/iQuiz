@@ -13,12 +13,23 @@ class AnswerViewController: UIViewController {
     var userAnswer: Int?
     
     @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var userAnswerLabel: UILabel!
+    @IBOutlet weak var correctAnswerLabel: UILabel!
+    @IBOutlet weak var resultLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         questionLabel.text = question!.question
-        // Do any additional setup after loading the view.
+        userAnswerLabel.text = question!.answers[userAnswer!]
+        correctAnswerLabel.text = question!.answers[question!.correctAnsIndex]
+        if userAnswer == question!.correctAnsIndex {
+            resultLabel.text = "Correct!"
+            resultLabel.textColor = UIColor.green
+        } else {
+            resultLabel.text = "Incorrect"
+            resultLabel.textColor = UIColor.red
+        }
     }
 
     override func didReceiveMemoryWarning() {
