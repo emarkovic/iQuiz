@@ -11,7 +11,8 @@ import UIKit
 class QuestionViewController: UIViewController {
     var questions: [Question]?
     var currentQuest = 0;
-    var previousBtnPressed: UIButton?
+    var currBtnPressed: UIButton?
+    var answerIndex: Int?
     
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var b0: UIButton!
@@ -20,10 +21,10 @@ class QuestionViewController: UIViewController {
     @IBOutlet weak var b3: UIButton!
     
     override func viewDidLoad() {
-        let curQuestion = questions![currentQuest]
         super.viewDidLoad()
+        let curQuestion = questions![currentQuest]
+        
         questionLabel.text = curQuestion.question
-        print(curQuestion.answers)
         
         b0.setTitle(curQuestion.answers[0], for: .normal)
         b1.setTitle(curQuestion.answers[1], for: .normal)
@@ -35,33 +36,37 @@ class QuestionViewController: UIViewController {
         clearPreviousPressed()
         
         b0.layer.borderWidth = 1
-        previousBtnPressed = b0
+        currBtnPressed = b0
+        answerIndex = 0
     }
     
     @IBAction func b1Pressed(_ sender: Any) {
         clearPreviousPressed()
         
         b1.layer.borderWidth = 1
-        previousBtnPressed = b1
+        currBtnPressed = b1
+        answerIndex = 1
     }
     
     @IBAction func b2Pressed(_ sender: Any) {
         clearPreviousPressed()
         
         b2.layer.borderWidth = 1
-        previousBtnPressed = b2
+        currBtnPressed = b2
+        answerIndex = 2
     }
     
     @IBAction func b3Pressed(_ sender: Any) {
         clearPreviousPressed()
         
         b3.layer.borderWidth = 1
-        previousBtnPressed = b3
+        currBtnPressed = b3
+        answerIndex = 3
     }
     
     func clearPreviousPressed() {
-        if previousBtnPressed != nil {
-            previousBtnPressed!.layer.borderWidth = 0;
+        if currBtnPressed != nil {
+            currBtnPressed!.layer.borderWidth = 0;
         }
     }
     
@@ -72,14 +77,17 @@ class QuestionViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "ToAnswer" {
+            let destination = segue.destination as! AnswerViewController
+            destination.question = questions![currentQuest]
+            destination.userAnswer = answerIndex            
+        }
     }
-    */
+    
 
 }

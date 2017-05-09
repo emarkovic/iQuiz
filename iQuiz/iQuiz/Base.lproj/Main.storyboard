@@ -118,6 +118,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcO-lU-mfd">
                                 <rect key="frame" x="26" y="617" width="323" height="30"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <segue destination="Z7f-cK-apw" kind="show" identifier="ToAnswer" id="m52-lb-DHB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -153,6 +156,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Arg-9Z-vxd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2509.5999999999999" y="586.95652173913049"/>
+        </scene>
+        <!--Answer View Controller-->
+        <scene sceneID="cRE-7v-lzY">
+            <objects>
+                <viewController id="Z7f-cK-apw" customClass="AnswerViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zZY-Hd-daQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="VJK-gd-Ih8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GVg-3R-Sch">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pdR-Za-Xe7">
+                                <rect key="frame" x="16" y="74" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pdR-Za-Xe7" firstAttribute="top" secondItem="zZY-Hd-daQ" secondAttribute="bottom" constant="10" id="Bs7-iu-blh"/>
+                            <constraint firstItem="pdR-Za-Xe7" firstAttribute="trailing" secondItem="GVg-3R-Sch" secondAttribute="trailingMargin" id="JA9-Cb-YBC"/>
+                            <constraint firstItem="pdR-Za-Xe7" firstAttribute="leading" secondItem="GVg-3R-Sch" secondAttribute="leadingMargin" id="v4J-sn-vXa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="questionLabel" destination="pdR-Za-Xe7" id="4wv-CW-ysi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f2O-Jk-V3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3212" y="588"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Tqr-VD-T4H">

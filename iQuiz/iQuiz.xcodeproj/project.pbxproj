@@ -16,6 +16,7 @@
 		619CC6FA1EBBA4E900D73839 /* CategoriesTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619CC6F91EBBA4E900D73839 /* CategoriesTableTableViewController.swift */; };
 		619CC6FE1EBBAFB900D73839 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619CC6FD1EBBAFB900D73839 /* Data.swift */; };
 		61D391F21EC23A1B0083C3A9 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D391F11EC23A1B0083C3A9 /* QuestionViewController.swift */; };
+		61D391F41EC249520083C3A9 /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61D391F31EC249520083C3A9 /* AnswerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		619CC6F91EBBA4E900D73839 /* CategoriesTableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableTableViewController.swift; sourceTree = "<group>"; };
 		619CC6FD1EBBAFB900D73839 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		61D391F11EC23A1B0083C3A9 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
+		61D391F31EC249520083C3A9 /* AnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				619CC6FD1EBBAFB900D73839 /* Data.swift */,
 				61D391F11EC23A1B0083C3A9 /* QuestionViewController.swift */,
 				619CC6F91EBBA4E900D73839 /* CategoriesTableTableViewController.swift */,
+				61D391F31EC249520083C3A9 /* AnswerViewController.swift */,
 				619CC6D01EBBA1F600D73839 /* Assets.xcassets */,
 				619CC6D21EBBA1F600D73839 /* LaunchScreen.storyboard */,
 				619CC6D51EBBA1F600D73839 /* Info.plist */,
@@ -270,6 +273,7 @@
 			files = (
 				619CC6FA1EBBA4E900D73839 /* CategoriesTableTableViewController.swift in Sources */,
 				619CC6CA1EBBA1F600D73839 /* AppDelegate.swift in Sources */,
+				61D391F41EC249520083C3A9 /* AnswerViewController.swift in Sources */,
 				61D391F21EC23A1B0083C3A9 /* QuestionViewController.swift in Sources */,
 				619CC6FE1EBBAFB900D73839 /* Data.swift in Sources */,
 			);
