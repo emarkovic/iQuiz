@@ -90,18 +90,30 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hx-Dl-v5m">
                                 <rect key="frame" x="92" y="110" width="192" height="30"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="b0Pressed:" destination="d3O-NA-Y3n" eventType="touchUpInside" id="Zaj-vO-7tT"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kG5-UP-bTA">
                                 <rect key="frame" x="92" y="150" width="192" height="30"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="b1Pressed:" destination="d3O-NA-Y3n" eventType="touchUpInside" id="tVI-xP-XMg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rs8-cQ-Cwa">
                                 <rect key="frame" x="92" y="190" width="192" height="30"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="b2Pressed:" destination="d3O-NA-Y3n" eventType="touchUpInside" id="alw-B1-Xg1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1U-Qd-Y5i">
                                 <rect key="frame" x="91" y="230" width="193" height="30"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="b3Pressed:" destination="d3O-NA-Y3n" eventType="touchUpInside" id="Yi4-rY-ebX"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcO-lU-mfd">
                                 <rect key="frame" x="26" y="617" width="323" height="30"/>
@@ -131,6 +143,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="b0" destination="5hx-Dl-v5m" id="qEd-pI-2Ok"/>
+                        <outlet property="b1" destination="kG5-UP-bTA" id="5gb-IA-aa3"/>
+                        <outlet property="b2" destination="rs8-cQ-Cwa" id="wDu-r7-rgE"/>
+                        <outlet property="b3" destination="l1U-Qd-Y5i" id="BTv-fe-znG"/>
                         <outlet property="questionLabel" destination="AT9-WB-LTM" id="491-Xy-aWo"/>
                     </connections>
                 </viewController>
