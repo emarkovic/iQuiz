@@ -25,9 +25,9 @@ class Category {
 class Question {
     var question: String
     var answers: [String]
-    var correctAnsIndex: number
+    var correctAnsIndex: Int
     
-    init(question: String, answers: [String], correctAnsIndex: number) {
+    init(question: String, answers: [String], correctAnsIndex: Int) {
         self.question = question
         self.answers = answers
         self.correctAnsIndex = correctAnsIndex

@@ -9,42 +9,6 @@
 import UIKit
 
 class CategoriesTableTableViewController: UITableViewController {
-//    var data = [
-//        Category(
-//                title: "Mathematics",
-//                subtitle: "Questions about math",
-//                questions: [
-//                    Question(question: "Which of the following is a subset of  {b, c, d}?", answers: [
-//                            "{ }",
-//                            "{a}",
-//                            "{1 , 2 , 3}",
-//                            "{a, b, c}"
-//                    ]),
-//                    
-//                    
-//                ],
-//                imageName: "math"
-//        ),
-//        Category(
-//                title: "Marvel Super Heroes",
-//                subtitle: "Questions about marvel",
-//                questions: [
-//                    "Who really is marvel?",
-//                    "What happens when a super hero walks into a bar?"
-//                ],
-//                imageName: "marvel"
-//        ),
-//        Category(
-//            title: "Science",
-//            subtitle: "Questions about science",
-//            questions: [
-//                "What is science?",
-//                "How does the world work?"
-//            ],
-//            imageName: "science"
-//        )
-//    ]
-    
     @IBAction func settingsPressed(_ sender: Any) {
         let refreshAlert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: UIAlertControllerStyle.alert)
         

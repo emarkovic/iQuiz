@@ -42,7 +42,7 @@ class QuestionsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath)
 
         let question = category?.questions[indexPath.row]
-        cell.textLabel?.text = question
+        cell.textLabel?.text = question?.question
 
         return cell
     }
