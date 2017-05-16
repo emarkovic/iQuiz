@@ -15,6 +15,7 @@ func extractJsonAndSave(json: Data) {
     let jsonData = try! JSONSerialization.jsonObject(with: json, options: [])
     if let array = jsonData as? [[String:Any]] {
         for cat in array {
+            print(context)
             let category = Category1(context: context)
             
             if let title = cat["title"] as? String {

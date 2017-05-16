@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 
 class CategoriesTableTableViewController: UITableViewController {
+    var url = "http://tednewardsandbox.site44.com/questions.json"
     
     var quizData = [String: Category]()
     var quizDataIndex: [String] = []
@@ -22,7 +23,7 @@ class CategoriesTableTableViewController: UITableViewController {
         print(self.quizData)
         print(self.quizData.count)
         if self.quizData.count == 0 {
-            getDataFromUrl(url: "http://tednewardsandbox.site44.com/questions.json")
+            getDataFromUrl(url: self.url)
             self.quizData = getAllData()
         }
         for (key, _) in self.quizData {
@@ -56,14 +57,33 @@ class CategoriesTableTableViewController: UITableViewController {
     }
     
     @IBAction func settingsPressed(_ sender: Any) {
-        let refreshAlert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: UIAlertControllerStyle.alert)
+        let popoverContent = self.storyboard?.instantiateViewController(withIdentifier: "SettingsView") as! SettingsViewController
         
+        popoverContent.modalPresentationStyle = .popover
+//        var popover = popoverContent?.popoverPresentationController
+        if let popover = popoverContent.popoverPresentationController {
+            let viewForSource = sender as! UIView
+            popover.sourceView = viewForSource
+            
+            popover.sourceRect = viewForSource.bounds
+            
+        }
+
+        popoverContent.url = self.url
+        self.present(popoverContent, animated: true, completion: nil)
         
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                    refreshAlert.dismiss(animated: true, completion: nil)
-                }))
-        
-        present(refreshAlert, animated: true, completion: nil)
+//        let refreshAlert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: UIAlertControllerStyle.alert)
+//        
+//        
+//        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+//                    refreshAlert.dismiss(animated: true, completion: nil)
+//                }))
+//        
+//        present(refreshAlert, animated: true, completion: nil)
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
  
     override func didReceiveMemoryWarning() {
