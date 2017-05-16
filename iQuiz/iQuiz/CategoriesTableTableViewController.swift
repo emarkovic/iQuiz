@@ -24,18 +24,13 @@ class CategoriesTableTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "iQuiz"
 
-//        var data = getAllData()
-//        print(data.count)
-//        self.deleteAllData()
-        var data = getAllData()
+
+        let data = getAllData()
+        print(data)
         print(data.count)
-        
         if data.count == 0 {
             getDataFromUrl(url: "http://tednewardsandbox.site44.com/questions.json")
         }
-        
-        data = getAllData()
-        print(data.count)
     }
     
     func getDataFromUrl(url: String) {
@@ -53,90 +48,11 @@ class CategoriesTableTableViewController: UITableViewController {
                 return
             }
             
-            self.extractJsonAndSave(json: data)
+            extractJsonAndSave(json: data)
         }
         task.resume()
     }
-    
-    func extractJsonAndSave(json: Data) {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        let jsonData = try! JSONSerialization.jsonObject(with: json, options: [])
-        if let array = jsonData as? [[String:Any]] {
-            for cat in array {
-                let category = Category1(context: context)
-                
-                if let title = cat["title"] as? String {
-                    category.title = title
-                }
-                if let desc = cat["desc"] as? String {
-                    category.desc = desc
-                }
-                
-                if let questions = cat["questions"] as? [[String:Any]] {
-                    for quest in questions {
-                        let question = Question1(context: context)
-                        let catQuest = Category_Question(context: context)
-                        
-                        if let text = quest["text"] as? String {
-                            question.text = text
-                        }
-                        if let answer = quest["answer"] as? String {
-                            question.answer = answer
-                        }
-                        if let answers = quest["answers"] as? [String] {
-                            question.optionA = answers[0]
-                            question.optionB = answers[1]
-                            question.optionC = answers[2]
-                            question.optionD = answers[3]
-                        }
-                        
-                        catQuest.category = category
-                        catQuest.question = question
-                    }
-                }
-                
-                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                self.getAllData()
-            }
-        }
-    }
-    
-    func getAllData() -> [Any] {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        do {
-            let catQuest = try context.fetch(Category_Question.fetchRequest())
-            return catQuest
-        } catch {
-            print("failed getting data")
-        }
-        return []
-    }
-    
-    func deleteAllData() {
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-        let fetchRequestCat = NSFetchRequest<NSFetchRequestResult>(entityName: "Category1")
-        let deleteRequestCat = NSBatchDeleteRequest(fetchRequest: fetchRequestCat)
-        
-        let fetchRequestQuest = NSFetchRequest<NSFetchRequestResult>(entityName: "Question1")
-        let deleteRequestQuest = NSBatchDeleteRequest(fetchRequest: fetchRequestQuest)
-        
-        let fetchRequestCatQuest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category_Question")
-        let deleteRequestCatQuest = NSBatchDeleteRequest(fetchRequest: fetchRequestCatQuest)
-        
-        do {
-            try context.execute(deleteRequestCat)
-            try context.execute(deleteRequestQuest)
-            try context.execute(deleteRequestCatQuest)
-            
-            try context.save()
-        } catch {
-            print ("There was an error")
-        }
-    }
-    
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -7,17 +7,139 @@
 //
 
 import UIKit
+import CoreData
 
-struct QuestionData {
-    var text: String
-    var answer: String
-    var answers: [String]
+func extractJsonAndSave(json: Data) {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let jsonData = try! JSONSerialization.jsonObject(with: json, options: [])
+    if let array = jsonData as? [[String:Any]] {
+        for cat in array {
+            let category = Category1(context: context)
+            
+            if let title = cat["title"] as? String {
+                category.title = title
+            }
+            if let desc = cat["desc"] as? String {
+                category.desc = desc
+            }
+            
+            if let questions = cat["questions"] as? [[String:Any]] {
+                for quest in questions {
+                    let question = Question1(context: context)
+                    let catQuest = Category_Question(context: context)
+                    
+                    if let text = quest["text"] as? String {
+                        question.text = text
+                    }
+                    if let answer = quest["answer"] as? String {
+                        question.answer = answer
+                    }
+                    if let answers = quest["answers"] as? [String] {
+                        question.optionA = answers[0]
+                        question.optionB = answers[1]
+                        question.optionC = answers[2]
+                        question.optionD = answers[3]
+                    }
+                    
+                    catQuest.category = category
+                    catQuest.question = question
+                }
+            }
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        }
+    }
 }
 
-struct QuizData {
-    var title: String
-    var desc: String
-    var questions: [QuestionData]
+func getAllData() -> [Category] {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let fetchRequestCatQuest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category_Question")
+    
+    do {
+        var mathCategory: Category?
+        var scienceCategory: Category?
+        var marvelCategory: Category?
+        
+        var mathQuestions: [Question] = []
+        var scienceQuestions: [Question] = []
+        var marvelQuestions: [Question] = []
+        
+        let catQuest = try context.fetch(fetchRequestCatQuest)
+        
+        // fill up the questions
+        for cq in catQuest {
+            let cqCat = (cq as! NSManagedObject).value(forKey: "category") as! NSManagedObject
+            let cqQuest = (cq as! NSManagedObject).value(forKey: "question") as! NSManagedObject
+            
+            let q = Question(question: cqQuest.value(forKey: "text") as! String, answers: [
+                cqQuest.value(forKey: "optionA") as! String,
+                cqQuest.value(forKey: "optionB") as! String,
+                cqQuest.value(forKey: "optionC") as! String,
+                cqQuest.value(forKey: "optionD") as! String
+                ], correctAnsIndex: Int(cqQuest.value(forKey: "answer") as! String)! - 1)
+            
+            let categoryTitle = cqCat.value(forKey: "title") as! String!
+            if categoryTitle == "Mathematics" {
+                mathQuestions.append(q)
+            } else if categoryTitle == "Science!" {
+                scienceQuestions.append(q)
+            } else if categoryTitle == "Marvel Super Heroes" {
+                marvelQuestions.append(q)
+            }
+        }
+        
+        // fill up the category
+        for cq in catQuest {
+            let cqCat = (cq as! NSManagedObject).value(forKey: "category") as! NSManagedObject
+            
+            let categoryTitle = cqCat.value(forKey: "title") as! String!
+            if categoryTitle == "Mathematics" {
+                if mathCategory == nil {
+                    mathCategory = Category(title: cqCat.value(forKey: "title") as! String, subtitle: cqCat.value(forKey: "desc") as! String, questions: mathQuestions, imageName: "math")
+                }
+            } else if categoryTitle == "Science!" {
+                if scienceCategory == nil {
+                    scienceCategory = Category(title: cqCat.value(forKey: "title") as! String, subtitle: cqCat.value(forKey: "desc") as! String, questions: scienceQuestions, imageName: "science")
+                }
+            } else if categoryTitle == "Marvel Super Heroes" {
+                if marvelCategory == nil {
+                    marvelCategory = Category(title: cqCat.value(forKey: "title") as! String, subtitle: cqCat.value(forKey: "desc") as! String, questions: marvelQuestions, imageName: "marvel")
+                }
+            }
+        }
+        
+        return [mathCategory!, scienceCategory!, marvelCategory!]
+        
+    } catch {
+        print("failed getting data")
+    }
+    
+    return []
+}
+
+func deleteAllData() {
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let fetchRequestCat = NSFetchRequest<NSFetchRequestResult>(entityName: "Category1")
+    let deleteRequestCat = NSBatchDeleteRequest(fetchRequest: fetchRequestCat)
+    
+    let fetchRequestQuest = NSFetchRequest<NSFetchRequestResult>(entityName: "Question1")
+    let deleteRequestQuest = NSBatchDeleteRequest(fetchRequest: fetchRequestQuest)
+    
+    let fetchRequestCatQuest = NSFetchRequest<NSFetchRequestResult>(entityName: "Category_Question")
+    let deleteRequestCatQuest = NSBatchDeleteRequest(fetchRequest: fetchRequestCatQuest)
+    
+    do {
+        try context.execute(deleteRequestCat)
+        try context.execute(deleteRequestQuest)
+        try context.execute(deleteRequestCatQuest)
+        
+        try context.save()
+    } catch {
+        print ("There was an error")
+    }
 }
 
 class Category {
