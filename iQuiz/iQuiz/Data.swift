@@ -8,6 +8,18 @@
 
 import UIKit
 
+struct QuestionData {
+    var text: String
+    var answer: String
+    var answers: [String]
+}
+
+struct QuizData {
+    var title: String
+    var desc: String
+    var questions: [QuestionData]
+}
+
 class Category {
     var title: String
     var subtitle: String

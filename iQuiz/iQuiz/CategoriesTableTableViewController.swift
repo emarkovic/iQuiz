@@ -22,8 +22,77 @@ class CategoriesTableTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "iQuiz"
+        getDataFromUrl(url: "http://tednewardsandbox.site44.com/questions.json")
     }
-
+    
+    func getDataFromUrl(url: String) {
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let url = URL(string: url)
+        
+        let task = session.dataTask(with: url!) { (data, response, error) in
+            guard error == nil else {
+                print(error!)
+                return
+            }
+            guard let data = data else {
+                print("data is empty")
+                return
+            }
+            
+            self.extractJsonAndSave(json: data)
+        }
+        task.resume()
+    }
+    
+    func extractJsonAndSave(json: Data) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        
+        let jsonData = try! JSONSerialization.jsonObject(with: json, options: [])
+        if let array = jsonData as? [[String:Any]] {
+            for cat in array {
+                let category = Category1(context: context)
+                
+                if let title = cat["title"] as? String {
+                    category.title = title
+                }
+                if let desc = cat["desc"] as? String {
+                    category.desc = desc
+                }
+                
+                if let questions = cat["questions"] as? [[String:Any]] {
+                    for quest in questions {
+                        let question = Question1(context: context)
+                        let catQuest = Category_Question(context: context)
+                        
+                        if let text = quest["text"] as? String {
+                            question.text = text
+                        }
+                        if let answer = quest["answer"] as? String {
+                            question.answer = answer
+                        }
+                        if let answers = quest["answers"] as? [String] {
+                            question.optionA = answers[0]
+                            question.optionB = answers[1]
+                            question.optionC = answers[2]
+                            question.optionD = answers[3]
+                        }
+                        
+                        catQuest.category = category
+                        catQuest.question = question
+                    }
+                }
+                
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            }
+        }
+    }
+    
+    func getAllData() {
+        
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

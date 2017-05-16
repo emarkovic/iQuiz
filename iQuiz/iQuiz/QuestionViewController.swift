@@ -25,7 +25,7 @@ class QuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let curQuestion = questions![currentQuestionIndex!]
+        let curQuestion = questions![currentQuestionIndex!]                
         
         questionLabel.text = curQuestion.question
         

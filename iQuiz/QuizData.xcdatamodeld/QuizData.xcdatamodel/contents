@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Category_Question" representedClassName="Category_Question" syncable="YES" codeGenerationType="class">
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category1" syncable="YES"/>
+        <relationship name="question" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Question1" syncable="YES"/>
+    </entity>
+    <entity name="Category1" representedClassName="Category1" syncable="YES" codeGenerationType="class">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Question1" representedClassName="Question1" syncable="YES" codeGenerationType="class">
+        <attribute name="answer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionA" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionB" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionC" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="optionD" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category1" positionX="18" positionY="447" width="128" height="73"/>
+        <element name="Question1" positionX="-279" positionY="99" width="128" height="133"/>
+        <element name="Category_Question" positionX="-209" positionY="375" width="128" height="73"/>
+    </elements>
+</model>
