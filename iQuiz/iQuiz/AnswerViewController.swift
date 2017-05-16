@@ -10,10 +10,14 @@ import UIKit
 
 class AnswerViewController: UIViewController {
     var question: Question?
+    
+    var quizData: [String:Category]?
+    var categoryClicked: String?
     var currentQuestionIndex: Int?
-    var categoryIndex: Int?
-    var userAnswer: Int?
     var numCorrect: Int?
+    
+    var userAnswer: Int?
+    
     
     
     @IBOutlet weak var questionLabel: UILabel!
@@ -23,6 +27,7 @@ class AnswerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let question = self.quizData?[self.categoryClicked!]?.questions[self.currentQuestionIndex!]
         
         questionLabel.text = question!.question
         userAnswerLabel.text = question!.answers[userAnswer!]
@@ -44,41 +49,30 @@ class AnswerViewController: UIViewController {
     
     @IBAction func nextBtnPressed(_ sender: Any) {
         let nextQuestionIndex = currentQuestionIndex! + 1
-        let categoryQuestions = data[categoryIndex!].questions
+        let categoryQuestions = self.quizData?[self.categoryClicked!]?.questions
+        
         
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
     
-        
-        if nextQuestionIndex > categoryQuestions.count - 1 {
+        if nextQuestionIndex > (categoryQuestions?.count)! - 1 {
+            
             let endVC = storyBoard.instantiateViewController(withIdentifier: "QuizResultsView") as! EndViewController
             endVC.results = numCorrect
-            self.present(endVC, animated:false, completion:nil)
+            endVC.totalQuestions = categoryQuestions?.count
+            self.present(endVC, animated:true, completion:nil)
+            
         } else {
+            
             let questionVC = storyBoard.instantiateViewController(withIdentifier: "QuestionView") as! QuestionViewController
-            questionVC.questions = data[categoryIndex!].questions
-            questionVC.currentQuestionIndex = currentQuestionIndex! + 1
-            questionVC.categoryIndex = categoryIndex!
+            questionVC.quizData = self.quizData
+            questionVC.currentQuestionIndex = self.currentQuestionIndex! + 1
+            questionVC.categoryClicked = self.categoryClicked
             questionVC.numCorrect = numCorrect!
-            self.present(questionVC, animated:false, completion:nil)
+            self.present(questionVC, animated:true, completion:nil)
+        
         }
-        
-        
         
     }
     
-    
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-////
-////        if segue.identifier == "ToQuestFromAns" {
-////            let destination = segue.destination as! QuestionViewController
-//            destination.questions = data[categoryIndex!].questions
-//            destination.currentQuestionIndex = currentQuestionIndex! + 1
-//            destination.categoryIndex = categoryIndex!
-////        }
-//    }
 
 }

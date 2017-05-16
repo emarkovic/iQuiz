@@ -10,27 +10,29 @@ import UIKit
 import CoreData
 
 class CategoriesTableTableViewController: UITableViewController {
-    @IBAction func settingsPressed(_ sender: Any) {
-        let refreshAlert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: UIAlertControllerStyle.alert)
+    
+    var quizData = [String: Category]()
+    var quizDataIndex: [String] = []
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
-                    refreshAlert.dismiss(animated: true, completion: nil)
-                }))
-        
-        present(refreshAlert, animated: true, completion: nil)
+        self.quizData = getAllData()
+        print(self.quizData)
+        print(self.quizData.count)
+        if self.quizData.count == 0 {
+            getDataFromUrl(url: "http://tednewardsandbox.site44.com/questions.json")
+            self.quizData = getAllData()
+        }
+        for (key, _) in self.quizData {
+            self.quizDataIndex.append(key)
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "iQuiz"
-
-
-        let data = getAllData()
-        print(data)
-        print(data.count)
-        if data.count == 0 {
-            getDataFromUrl(url: "http://tednewardsandbox.site44.com/questions.json")
-        }
     }
     
     func getDataFromUrl(url: String) {
@@ -52,6 +54,17 @@ class CategoriesTableTableViewController: UITableViewController {
         }
         task.resume()
     }
+    
+    @IBAction func settingsPressed(_ sender: Any) {
+        let refreshAlert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: UIAlertControllerStyle.alert)
+        
+        
+        refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                    refreshAlert.dismiss(animated: true, completion: nil)
+                }))
+        
+        present(refreshAlert, animated: true, completion: nil)
+    }
  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -67,17 +80,18 @@ class CategoriesTableTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return data.count
+        return self.quizData.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         
-        let item = data[indexPath.row]
-        cell.textLabel?.text = item.title
-        cell.detailTextLabel?.text = item.subtitle
-        cell.imageView?.image = item.image
-        print(cell)
+        let title = self.quizDataIndex[indexPath.row]
+        let item = self.quizData[title]
+        
+        cell.textLabel?.text = item?.title
+        cell.detailTextLabel?.text = item?.subtitle
+        cell.imageView?.image = item?.image
 
         return cell
     }
@@ -91,14 +105,18 @@ class CategoriesTableTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        let rowClicked = tableView.indexPathForSelectedRow?.row
+        
+        let rowClicked = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRow(at: rowClicked!)
+        let currentCellTitle = currentCell!.textLabel?.text
+        
+        print(currentCellTitle!)
+        
         if segue.identifier == "ToQuiz" {
             let destination = segue.destination as! QuestionViewController
-            // row clicked targets the correct category
-            destination.categoryIndex = rowClicked!
-            destination.questions = data[rowClicked!].questions
+            
+            destination.quizData = self.quizData
+            destination.categoryClicked = currentCellTitle
             destination.currentQuestionIndex = 0
             destination.numCorrect = 0
         }

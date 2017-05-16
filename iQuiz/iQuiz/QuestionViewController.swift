@@ -10,8 +10,11 @@ import UIKit
 
 class QuestionViewController: UIViewController {
     var questions: [Question]?
+    
+    //gotten from segue
+    var quizData: [String:Category]?
+    var categoryClicked: String?
     var currentQuestionIndex: Int?
-    var categoryIndex: Int?
     var numCorrect: Int?
     
     var currBtnPressed: UIButton?
@@ -25,14 +28,15 @@ class QuestionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let curQuestion = questions![currentQuestionIndex!]                
+        self.questions = self.quizData?[self.categoryClicked!]?.questions
+        let curQuestion = self.questions?[self.currentQuestionIndex!]
         
-        questionLabel.text = curQuestion.question
+        questionLabel.text = curQuestion?.question
         
-        b0.setTitle(curQuestion.answers[0], for: .normal)
-        b1.setTitle(curQuestion.answers[1], for: .normal)
-        b2.setTitle(curQuestion.answers[2], for: .normal)
-        b3.setTitle(curQuestion.answers[3], for: .normal)
+        b0.setTitle(curQuestion?.answers[0], for: .normal)
+        b1.setTitle(curQuestion?.answers[1], for: .normal)
+        b2.setTitle(curQuestion?.answers[2], for: .normal)
+        b3.setTitle(curQuestion?.answers[3], for: .normal)
     }
 
     @IBAction func b0Pressed(_ sender: Any) {
@@ -76,7 +80,7 @@ class QuestionViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
     
 
@@ -87,13 +91,18 @@ class QuestionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToAnswer" {
             let destination = segue.destination as! AnswerViewController
-            destination.question = questions![currentQuestionIndex!]
-            destination.currentQuestionIndex = currentQuestionIndex!
-            destination.categoryIndex = categoryIndex!
-            destination.numCorrect = numCorrect!
+            
+            
+            destination.quizData = self.quizData
+            destination.question = self.questions![currentQuestionIndex!]
+            destination.currentQuestionIndex = self.currentQuestionIndex!
+            destination.categoryClicked = self.categoryClicked
+            destination.numCorrect = self.numCorrect!
+            
             if answerIndex == nil {
                 answerIndex = 0
             }
+            
             destination.userAnswer = answerIndex            
         }
     }

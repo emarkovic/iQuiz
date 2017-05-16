@@ -10,11 +10,12 @@ import UIKit
 
 class EndViewController: UIViewController {
     var results: Int?
+    var totalQuestions: Int?
     
     @IBOutlet weak var resultsLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultsLabel.text = "\(results!) out of 5 correct"
+        resultsLabel.text = "\(results!) out of \(totalQuestions!) correct"
         // Do any additional setup after loading the view.
     }
 
